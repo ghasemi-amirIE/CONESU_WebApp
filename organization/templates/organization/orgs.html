@@ -1,0 +1,17 @@
+{% extends "organization/base.html" %}
+{% block content%}
+
+<p>Organizations</p>
+
+    <ul>
+        {%for org in organizations %}
+         <li> 
+            <a href="{% url 'organization:orgpage' org.id %}">{{ org }}</a>
+        </li>
+        {% empty %}
+         <li> No topics have been added yet.</li>
+        {% endfor %}
+    </ul>
+    <a href ="{% url 'organization:neworg' %}">Create organization</a>
+
+{% endblock content%}

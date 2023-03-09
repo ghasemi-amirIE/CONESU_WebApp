@@ -1,0 +1,22 @@
+{% extends "organization/base.html" %}
+
+{% block header %}
+  <div class='jumbotron'>
+      <h1 class='display-3'>Share your opinion!</h1>        
+  </div>
+{% endblock header %}
+
+{% block content %}
+  <h2>
+    We are glad to have you here and appreciate 
+    your interest in sharing your thoughts and 
+    opinions with us. Your valuable feedback will 
+    help us understand how we can better serve our
+     mission of promoting peace, human rights, and 
+     sustainable development across the globe. 
+  </h2>
+  <a class="btn btn-primary" href={% url 'organization:organizations'%} role="button">Explore</a>
+  <a class="btn btn-primary" href={% url 'organization:survey'%} role="button">Take a survey</a>
+
+  
+{% endblock content %}

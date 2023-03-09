@@ -1,0 +1,20 @@
+{%extends 'organization/base.html'%}
+{%block content%}
+	<div class="container" style="max-width:600px">
+		<div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+			<h1 class="display-4">Register the company</h1>
+		
+		</div>
+		<div class="py-5">
+			<div class="row">
+				<div class="col-12">
+					<form method="post">
+						{% csrf_token %}
+						{{ form.as_p }}
+						<input type="submit">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+{%endblock content%}
