@@ -1,0 +1,65 @@
+{% extends 'organization/base.html' %}
+{% load bootstrap5 %}
+{%load static%}
+{% block page_title %}<title>Profile page</title>{% endblock page_title %}
+
+{%block css_files%}
+<link rel='stylesheet' href="{% static 'organization/profile.css'%}">
+{% endblock %}
+{% block scripts %}
+{% endblock scripts %}
+
+{% block content %}
+<div>
+    <div class="profile">
+        <img src="https://via.placeholder.com/140" alt="Profile Picture">
+        <div>
+            <h1>{{f_name}} {{l_name}}</h1>
+            <p>{{org}} - {{position}}</p>
+            
+        </div>
+        <div class ='profile-buttons'>
+        <a class="btn btn-primary" href={% url 'organization:organizations'%} role="button">Message</a>	&nbsp&nbsp&nbsp&nbsp&nbsp
+        <a class="btn btn-primary" href={% url 'organization:survey'%} role="button">Connect</a>&nbsp&nbsp&nbsp&nbsp&nbsp
+        <a class="btn btn-primary" href={% url 'organization:survey'%} role="button">Take a survey</a>
+        </div>
+    </div>
+{% comment %}    <p>user stais {{satis_user.user__satis}}</p>
+   <p>aver satis {{satis_exc.avg__satis}}</p> {% endcomment %}
+</div>
+        <canvas id="myChart"></canvas>
+      </div>
+    
+      <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['{{f_name}} {{l_name}}', 'Average'],
+            datasets: [{
+              label: 'Satisfaction',
+              data: ['{{satis_user.user__satis}}', '{{satis_exc.avg__satis}}'],
+              backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
+              borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+            }
+          }
+        });
+        
+      </script>
+</div>
+{% endblock content %}
+
+

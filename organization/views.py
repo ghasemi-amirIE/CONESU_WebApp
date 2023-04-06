@@ -4,7 +4,9 @@ from .forms import SurveyForm
 from .models import Organization, Survey
 from django.http import Http404
 from django.views.generic.base import TemplateView
-from django.db.models import Avg
+from django.db.models import Avg, Q
+from users.models import CustomUser
+from django.http import JsonResponse
  
 
 # Create your views here.
@@ -55,17 +57,7 @@ class Pie(TemplateView):
     template_name = 'pie.html'
 
 
-""" def survey(request):
-	context ={}
-	form = SurveyForm()
-	context = {'form': form}
-	if request.GET:
-		temp = request.GET
-		print(temp)
-	return render(request, "survey.html", context) """
-
-""" def survey(request):
-    #Add new topic
+def survey(request):
     if request.method != 'POST':
         form = SurveyForm()
     else:
@@ -73,17 +65,31 @@ class Pie(TemplateView):
         form = SurveyForm(data = request.POST)
         if form.is_valid():
             new_survey = form.save(commit = False)
+            new_survey.participant = request.user
             new_survey.save()
-            return redirect('organization:orgs')
+            return redirect('organization:profile')
         
+    #Display form.
     context = {'form': form}
-    return render(request, 'organization/survey.html', context) """
+    return render(request, 'organization/survey.html', context)
 
-class SurveyView(CreateView):
-    model = Survey
-    fields = '__all__'
-    template_name = 'survey.html'
-    success_url = '/orgs'
+
+def profile(request):
+    user = CustomUser.objects.get(id=request.user.id)
+    satis_user = Survey.objects.filter(Q(participant_id=request.user.id)).aggregate(user__satis=Avg('satsified'))
+    satis_exc = Survey.objects.filter(~Q(participant_id=request.user.id)).aggregate(avg__satis=Avg('satsified'))             
+    context ={
+        'f_name':user.first_name,
+        'l_name':user.last_name,
+        'org':user.organization,
+        'position':user.position,
+        'satis_exc':satis_exc,
+        'satis_user':satis_user
+    }
+    return render(request, 'organization/profile.html', context)
+
+    
+
 
 
     

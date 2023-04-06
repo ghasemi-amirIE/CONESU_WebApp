@@ -1,4 +1,5 @@
 {%extends 'organization/base.html'%}
+{% load bootstrap5 %}
 {%block content%}
 	<div class="container" style="max-width:600px">
 		<div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
@@ -8,13 +9,21 @@
 		<div class="py-5">
 			<div class="row">
 				<div class="col-12">
-					<form method="post">
+					<form method="post" action="{% url 'organization:survey' %}" class="form">
 						{% csrf_token %}
-						{{ form.as_p }}
-						<input type="submit">
-					</form>
+						{% bootstrap_form form %}
+					
+						{% buttons %}
+						  <button name="submit" class="btn btn-primary">Submit</button>
+						{% endbuttons %}
+						
+						<input type="hidden" name="next" value="{% url 'organization:profile' %}" />
+					  </form>
 				</div>
 			</div>
 		</div>
 	</div>
 {%endblock content%}
+
+
+

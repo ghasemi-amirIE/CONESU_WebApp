@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
-
+from users.models import CustomUser
 # Create your models here.
 class Organization(models.Model):
     title = models.CharField(max_length=200, blank=False)
@@ -27,5 +27,6 @@ class Survey(models.Model):
     period = models.IntegerField(max_length=2,
                                  validators=[MinValueValidator(1), MaxValueValidator(40)])
     occupation = models.CharField(max_length=10, choices=POSITION_CHOICE)
+    participant = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     
    

@@ -6,14 +6,8 @@ class NewOrgForm(forms.ModelForm):
         model = Organization
         fields = '__all__'
 
-class SurveyForm(forms.Form):
-        STUDENT = 'STUD'
-        EMPLOYEE = 'EMP'
-        POSITION_CHOICE = [
-            (STUDENT, 'Student'),
-            (EMPLOYEE, 'Employee'),]
-        widgets = {
-            'occupation':forms.Select(choices=POSITION_CHOICE,
-            attrs={'class': 'form-control'})
-        }
+class SurveyForm(forms.ModelForm):
+       class Meta:
+            model = Survey
+            fields = ['organization','satsified','period','occupation',]
 

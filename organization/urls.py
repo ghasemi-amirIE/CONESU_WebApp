@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import NewOrgView, Pie, SurveyView
+from .views import NewOrgView, Pie
 from . import views
 
 
@@ -12,5 +12,6 @@ urlpatterns = [
     path('orgs/', views.orgs, name = 'organizations'),
     path('orgs/<int:org_id>', views.orgpage, name ='orgpage'),
     path('pie/', Pie.as_view(), name = 'pie'),
-    path('survey/', SurveyView.as_view(), name="survey"),
+    path('survey/', views.survey, name="survey"),
+    path('profile/', views.profile, name = 'profile'),
 ]

@@ -15,8 +15,14 @@
      mission of promoting peace, human rights, and 
      sustainable development across the globe. 
   </h2>
-  <a class="btn btn-primary" href={% url 'organization:organizations'%} role="button">Explore</a>
+  {% if user.is_authenticated %}
+  <a class="btn btn-primary" href={% url 'organization:profile'%} role="button">Profile</a>
   <a class="btn btn-primary" href={% url 'organization:survey'%} role="button">Take a survey</a>
+          {% else %}
+            <li><a href="{% url 'users:register' %}">Register</a>&nbsp &nbsp</li>
+            <li><a href="{% url 'users:login' %}"> Log in  </a></li>
+          {% endif %}
+  
 
   
 {% endblock content %}

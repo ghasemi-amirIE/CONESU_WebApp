@@ -6,10 +6,20 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    {% block page_title %}
     <title>Survey platform</title>
+    {% endblock page_title %}
+    {%block css_files%}
+    {%endblock css_files%}
+    {% block scripts %}
+    {% endblock scripts %}
 
     {% bootstrap_css %}
+
     {% bootstrap_javascript %}
 
   </head>
@@ -27,12 +37,13 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{%url 'organization:organizations'%}">organizations</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{%url 'organization:survey'%}">Take a survey!</a>
-
             </li>
           </ul>
         </div>
-       {% comment %}  <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right">
           {% if user.is_authenticated %}
             <li><a>Hello, {{ user.username }}! </a>&nbsp &nbsp</li>
             <li><a href="{% url 'users:logout' %}"> Log out</a></li>
@@ -40,7 +51,9 @@
             <li><a href="{% url 'users:register' %}">Register</a>&nbsp &nbsp</li>
             <li><a href="{% url 'users:login' %}"> Log in  </a></li>
           {% endif %}
-        </ul> {% endcomment %}
+        </ul>
+      </div>
+    </nav>
       </div>
     </nav>
     
