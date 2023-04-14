@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     #apps:
     'jquery',
     'bootstrap5',
+    'chartjs',
 
     'django.contrib.admin',
     'django.contrib.auth',

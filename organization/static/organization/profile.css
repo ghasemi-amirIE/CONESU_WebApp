@@ -1,14 +1,14 @@
 body {
-  background-color: rgb(0, 6, 8);
+  background-color: rgb(0, 163, 218);
 }
-.container {
+/* .container {
   margin: 100px;
   width: 7000px;
   background-color: #ffffff;
   padding: 40px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
-}
+} */
 .profile {
   display: flex;
   align-items: center;
@@ -42,5 +42,37 @@ body {
 }
 .profile-buttons {
   top: 18px;
+  position: relative;
+}
+.grid-container {
+  bottom: 30px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  font-size: xx-large;
+  align-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
+  align-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.container {
+  width: 100%;
+  margin: 40px;
+  background-color: #ffffff;
+  padding: 40px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+.chart-container {
+  margin: 20px;
+  background-color: #ffffff;
+  padding: 40px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
 }

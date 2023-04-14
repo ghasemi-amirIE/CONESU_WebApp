@@ -1,4 +1,5 @@
 {% load bootstrap5 %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    
     {% block page_title %}
     <title>Survey platform</title>
     {% endblock page_title %}
@@ -23,50 +25,45 @@
     {% bootstrap_javascript %}
 
   </head>
-  
   <body>
-
-    <!-- Static navbar -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'organization:index'%}">Survey platform</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{%url 'organization:organizations'%}">organizations</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{%url 'organization:survey'%}">Take a survey!</a>
-            </li>
-          </ul>
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-          {% if user.is_authenticated %}
-            <li><a>Hello, {{ user.username }}! </a>&nbsp &nbsp</li>
-            <li><a href="{% url 'users:logout' %}"> Log out</a></li>
-          {% else %}
-            <li><a href="{% url 'users:register' %}">Register</a>&nbsp &nbsp</li>
-            <li><a href="{% url 'users:login' %}"> Log in  </a></li>
-          {% endif %}
-        </ul>
-      </div>
-    </nav>
-      </div>
-    </nav>
-    
-    <div class="container">
-
+    <style>
+      body {
+        background-color: #a7cbd5;
+      }
+    </style>
       <div class="page-header">
-        {% block header %}{% endblock %}
+        {% block header %}<nav class="navbar navbar-expand-lg bg-body-tertiary">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'organization:index'%}">Survey platform</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{%url 'organization:organizations'%}">organizations</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{%url 'organization:survey'%}">survey</a>
+                </li>
+              </ul>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+              {% if user.is_authenticated %}
+                <li><a>Hello, {{ user.username }}! </a>&nbsp &nbsp</li>
+                <li><a href="{% url 'users:logout' %}"> Log out</a></li>
+              {% else %}
+                <li><a href="{% url 'users:register' %}">Register</a>&nbsp &nbsp</li>
+                <li><a href="{% url 'users:login' %}"> Log in  </a></li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
       </div>
-      <div>
-        {% block content %}{% endblock %}
-      </div>
+      {% endblock %}
 
-    </div> <!-- /container -->
+        {% block content %}
+        {% endblock %}
+    </body>
 
-  </body>
 </html>

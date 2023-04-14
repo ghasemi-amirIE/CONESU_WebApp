@@ -4,7 +4,7 @@ from .forms import SurveyForm
 from .models import Organization, Survey
 from django.http import Http404
 from django.views.generic.base import TemplateView
-from django.db.models import Avg, Q
+from django.db.models import Avg, Q, Count
 from users.models import CustomUser
 from django.http import JsonResponse
  
@@ -73,24 +73,31 @@ def survey(request):
     context = {'form': form}
     return render(request, 'organization/survey.html', context)
 
-
 def profile(request):
     user = CustomUser.objects.get(id=request.user.id)
     satis_user = Survey.objects.filter(Q(participant_id=request.user.id)).aggregate(user__satis=Avg('satsified'))
     satis_exc = Survey.objects.filter(~Q(participant_id=request.user.id)).aggregate(avg__satis=Avg('satsified'))             
+    user_surveys = Survey.objects.filter(participant_id=request.user) 
+    org_count = Survey.objects.filter(participant_id = request.user).values('organization_id').annotate(count = Count('organization_id'))                            
+    
     context ={
         'f_name':user.first_name,
         'l_name':user.last_name,
         'org':user.organization,
         'position':user.position,
         'satis_exc':satis_exc,
-        'satis_user':satis_user
+        'satis_user':satis_user,
+        'surveys': user_surveys,
+        'org_count': org_count,
     }
     return render(request, 'organization/profile.html', context)
 
+class Landing(TemplateView):
+    template_name = "girdtest.html"
+
     
 
 
 
-    
 
+    
