@@ -1,0 +1,98 @@
+
+.profile img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  margin-right: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.profile h1 {
+  width: 398px;
+  height: 87px;
+  left: 500px;
+  top: 700px;
+  font-style: normal;
+  font-family: 'open sans';
+  font-weight: 800;
+  font-size: 50px;
+  line-height: 150px;
+}
+.profile p {
+  font-size: 16px;
+  margin: 0;
+  color: #666;
+  margin-left: 5px;
+}
+.back-ground {
+  background-color: #666;
+}
+.profile-buttons {
+  top: 18px;
+  position: relative;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  font-size: 30px;
+  width: 95%;
+  text-align: center;
+  align-content: center;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+.container {
+  border-radius: 25px;
+  width: 100%;
+  margin: 40px;
+  background-color: #fafafa;
+  padding: 40px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  align-items: center;
+}
+
+.chart-container {
+  width: 80%;
+  margin: 20px;
+  background-color: #ffffff;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 80%;
+  align-items: center;
+  position: relative;
+}
+
+.navbar {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.nav-bar nav-link {
+  font-size: small;
+  font-family: "Open Sans", sans-serif;
+  color: black;
+  text-align: center;
+}
+
+.nav-bar li {
+  color: black;
+}
+
+.navbar-brand {
+  color: black;
+  font-weight: bold;
+}

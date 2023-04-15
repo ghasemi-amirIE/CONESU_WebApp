@@ -77,17 +77,22 @@ def profile(request):
     user = CustomUser.objects.get(id=request.user.id)
     satis_user = Survey.objects.filter(Q(participant_id=request.user.id)).aggregate(user__satis=Avg('satsified'))
     satis_exc = Survey.objects.filter(~Q(participant_id=request.user.id)).aggregate(avg__satis=Avg('satsified'))             
-    user_surveys = Survey.objects.filter(participant_id=request.user) 
-    org_count = Survey.objects.filter(participant_id = request.user).values('organization_id').annotate(count = Count('organization_id'))                            
+    org_count = Survey.objects.filter(participant_id = request.user).values('organization').annotate(count = Count('organization'))                            
     
+    passed_orgs = [i['organization'] for i in org_count]
+    passed_times = [i['count'] for i in org_count]
+
+
     context ={
         'f_name':user.first_name,
         'l_name':user.last_name,
         'org':user.organization,
         'position':user.position,
+        'avatar': user.avatar,
         'satis_exc':satis_exc,
         'satis_user':satis_user,
-        'surveys': user_surveys,
+        'passed_orgs': passed_orgs,
+        'passed_times':passed_times,
         'org_count': org_count,
     }
     return render(request, 'organization/profile.html', context)

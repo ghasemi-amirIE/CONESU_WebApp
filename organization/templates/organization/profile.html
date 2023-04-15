@@ -11,10 +11,10 @@
 {% block content %}
 
     <div class="container profile">
-        <img src="https://via.placeholder.com/140" alt="Profile Picture">
+        <img src="{{avatar.url}}">
         <div class "profile">
             <h1>{{f_name}} {{l_name}}</h1>
-            <p>{{org}} - {{position}} {% for i in org_count %}{{i.count}}{% endfor %}</p>
+            <p>{{org}} - {{position}}</p>
             
             
         </div>
@@ -62,15 +62,15 @@
         
       </script>
       <script>
-        {% comment %} Can't pull variables () from views  {% endcomment %}
+        {% comment %} For loop doenst work - cant pull list of organizations and satisfaction levels  {% endcomment %}
         var ctx = document.getElementById('Satis_bar2').getContext('2d');
         var myChart = new Chart(ctx, {
           type: 'doughnut',
           data: {
-            labels: [{% for i in org_count %}'{{i.organization_id}}'{% endfor %}],
+            labels: {{passed_orgs}},
             datasets: [{
-              label: 'Satisfaction',
-              data: [{% for i in org_count %}'{{i.count}}'{% endfor %}],
+              label: 'Completed surveys',
+              data: {{passed_times}},
               backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
                'rgba(54, 162, 235, 0.2)',

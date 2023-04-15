@@ -7,7 +7,7 @@ class CustomUser(AbstractUser):
     last_name = models.CharField(max_length=150, verbose_name='Last name')
     organization = models.CharField(max_length=150, verbose_name='Organization')
     position = models.CharField(max_length=150, verbose_name='Position')
-    avatar = models.ImageField(blank=True)
+    avatar = models.ImageField(blank=True, upload_to="avatars")
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} - {self.organization}" 

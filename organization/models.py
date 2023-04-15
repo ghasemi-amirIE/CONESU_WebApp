@@ -22,10 +22,8 @@ class Survey(models.Model):
             (EMPLOYEE, 'Employee'),]
 
     organization = models.ForeignKey(Organization, on_delete= models.CASCADE)
-    satsified = models.IntegerField(max_length=2, 
-                                    validators=[MinValueValidator(1), MaxValueValidator(10)])
-    period = models.IntegerField(max_length=2,
-                                 validators=[MinValueValidator(1), MaxValueValidator(40)])
+    satsified = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
+    period = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(40)])
     occupation = models.CharField(max_length=10, choices=POSITION_CHOICE)
     participant = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     
