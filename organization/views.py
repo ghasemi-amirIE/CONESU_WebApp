@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
-from .forms import SurveyForm
-from .models import Organization, Survey
+from .forms import SurveyForm, NewOrgForm
+from .models import OrgProfile, Survey
 from django.http import Http404
 from django.views.generic.base import TemplateView
 from django.db.models import Avg, Q, Count
@@ -17,7 +17,7 @@ def index(request):
 
 
 class NewOrgView(CreateView):
-    model = Organization
+    model = OrgProfile
     fields = '__all__'
     template_name = 'new_org.html'
     success_url = '/orgs'
@@ -27,12 +27,12 @@ def success(request):
 
 def orgs(request):
     #show all orgs
-    orgs = Organization.objects.all()
+    orgs = OrgProfile.objects.all()
     context = {'organizations': orgs}
     return render(request, "organization/orgs.html", context)
 
 def orgpage(request, org_id):
-    org = Organization.objects.get(id = org_id)
+    org = OrgProfile.objects.get(id = org_id)
     #survey results to put into dashboard
     survey_results = Survey.objects.filter(organization_id = org_id)
     avg_satis = survey_results.aggregate(Avg('satsified'))

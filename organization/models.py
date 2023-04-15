@@ -1,15 +1,20 @@
 from django.db import models
+
+from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
 from users.models import CustomUser
+import datetime
+
 # Create your models here.
-class Organization(models.Model):
+class OrgProfile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=200, blank=False)
-    logo = models.ImageField(blank =True, upload_to = 'uploads')
+    logo = models.ImageField(blank=True, upload_to='uploads')
     vision = models.CharField(max_length=250, blank=True)
     mission = models.CharField(max_length=500, blank=True)
     num_employees = models.CharField(max_length=20)
-    founded = models.CharField(max_length=4)
-    email = models.EmailField(max_length=255)
+    founded = models.PositiveIntegerField(validators=[MinValueValidator(1000), MaxValueValidator(datetime.datetime.now().year)])
+    email = models.EmailField(max_length=255, blank=False)
 
     def __str__(self):
         return f"{self.title}"
@@ -21,7 +26,7 @@ class Survey(models.Model):
             (STUDENT, 'Student'),
             (EMPLOYEE, 'Employee'),]
 
-    organization = models.ForeignKey(Organization, on_delete= models.CASCADE)
+    organization = models.ForeignKey(OrgProfile, on_delete= models.CASCADE)
     satsified = models.IntegerField(max_length=2, 
                                     validators=[MinValueValidator(1), MaxValueValidator(10)])
     period = models.IntegerField(max_length=2,
