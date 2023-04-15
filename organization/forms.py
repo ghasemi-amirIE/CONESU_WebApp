@@ -1,13 +1,12 @@
 from django import forms
-from .models import Organization, Survey
+from .models import Survey, OrgProfile
 
 class NewOrgForm(forms.ModelForm):
     class Meta:
-        model = Organization
+        model = OrgProfile
         fields = '__all__'
 
 class SurveyForm(forms.ModelForm):
        class Meta:
             model = Survey
             fields = ['organization','satsified','period','occupation',]
-

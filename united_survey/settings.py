@@ -34,7 +34,7 @@ INSTALLED_APPS = [
 'users',
     #my apps:
     'organization',
-    
+    'info_pages',
 
     #apps:
     'jquery',
@@ -67,8 +67,9 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / "organization" / "templates"/"organization",
-            BASE_DIR / "organization" / "static"/'organization',
+            BASE_DIR / "organization" / "templates" / "organization",
+            BASE_DIR / "organization" / "static" / "organization",
+            BASE_DIR / "info_pages" / "templates"/ "static",
 
         ],
         'APP_DIRS': True,

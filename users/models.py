@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class CustomUser(AbstractUser):
@@ -10,6 +12,7 @@ class CustomUser(AbstractUser):
     avatar = models.ImageField(blank=True, upload_to="avatars")
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} - {self.organization}" 
+        return f"{self.first_name} {self.last_name} - {self.organization}"
 
-
+class UserProfile(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE) 

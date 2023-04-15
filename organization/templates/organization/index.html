@@ -17,7 +17,9 @@
      sustainable development across the globe. 
   </h2>
   {% if user.is_authenticated %}
-  <a class="btn btn-primary" href={% url 'organization:profile'%} role="button">Profile</a>
+  <a class="btn btn-primary" href={% url 'organization:profile'%} role="button">My Profile</a>
+  <a class="btn btn-primary" href={% url 'info_pages:project' project_name='unproject' %} role="button">Project</a>
+  <a class="btn btn-primary" href={% url 'info_pages:resources' %} role="button">Resources</a>
   <a class="btn btn-primary" href={% url 'organization:survey'%} role="button">Take a survey</a>
           {% else %}
             <li><a href="{% url 'users:register' %}">Register</a>&nbsp &nbsp</li>

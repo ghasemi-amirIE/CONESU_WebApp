@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from .views import NewOrgView, Pie, Landing
 from . import views
 
@@ -15,4 +15,5 @@ urlpatterns = [
     path('survey/', views.survey, name="survey"),
     path('profile/', views.profile, name = 'profile'),
     path('landing/', Landing.as_view(), name='test-landing-page'),
+    path('info_pages/', include('info_pages.urls')),
 ]
