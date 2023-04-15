@@ -25,7 +25,6 @@ class Survey(models.Model):
     POSITION_CHOICE = [
             (STUDENT, 'Student'),
             (EMPLOYEE, 'Employee'),]
-
     organization = models.ForeignKey(OrgProfile, on_delete= models.CASCADE)
     satsified = models.IntegerField(max_length=2, 
                                     validators=[MinValueValidator(1), MaxValueValidator(10)])
