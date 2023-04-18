@@ -31,15 +31,17 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-'users',
+
     #my apps:
     'organization',
     'info_pages',
+    'users',
 
     #apps:
     'jquery',
     'bootstrap5',
     'chartjs',
+    'django_extensions',
 
     'django.contrib.admin',
     'django.contrib.auth',

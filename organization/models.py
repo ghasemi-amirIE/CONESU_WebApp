@@ -7,7 +7,7 @@ import datetime
 
 # Create your models here.
 class OrgProfile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
     title = models.CharField(max_length=200, blank=False)
     logo = models.ImageField(blank=True, upload_to='uploads')
     vision = models.CharField(max_length=250, blank=True)
@@ -25,11 +25,9 @@ class Survey(models.Model):
     POSITION_CHOICE = [
             (STUDENT, 'Student'),
             (EMPLOYEE, 'Employee'),]
-    organization = models.ForeignKey(OrgProfile, on_delete= models.CASCADE)
-    satsified = models.IntegerField(max_length=2, 
-                                    validators=[MinValueValidator(1), MaxValueValidator(10)])
-    period = models.IntegerField(max_length=2,
-                                 validators=[MinValueValidator(1), MaxValueValidator(40)])
+    organization = models.OneToOneField(OrgProfile, on_delete= models.CASCADE)
+    satsified = models.IntegerField( validators=[MinValueValidator(1), MaxValueValidator(10)])
+    period = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(40)])
     occupation = models.CharField(max_length=10, choices=POSITION_CHOICE)
     participant = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     

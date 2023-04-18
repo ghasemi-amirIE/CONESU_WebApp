@@ -4,7 +4,8 @@
 
 {% block content %}
     
-  <form method="post" action="{% url 'users:register' %}" class="form" enctype="multipart/form-data">
+  <form method="post" action="{% url 'users:register' %}" class="form"  enctype="multipart/form-data">
+
     {% csrf_token %}
     {% bootstrap_form form %}
 

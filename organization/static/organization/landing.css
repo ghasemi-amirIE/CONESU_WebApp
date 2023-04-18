@@ -96,3 +96,7 @@
   color: black;
   font-weight: bold;
 }
+
+.home-section {
+   background: url('images/datatest.png') no-repeat;
+}
