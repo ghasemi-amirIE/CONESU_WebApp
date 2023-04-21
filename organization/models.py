@@ -30,5 +30,15 @@ class Survey(models.Model):
     period = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(40)])
     occupation = models.CharField(max_length=10, choices=POSITION_CHOICE)
     participant = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    
+
+class Contact(models.Model):
+    name = models.CharField(max_length=100, name="Full name")
+    organization = models.CharField(max_length=100, name = "Company")
+    role = models.CharField(max_length=100, name ="Role")
+    email = models.EmailField(max_length=200)
+    phone_number = models.CharField(max_length=20, blank = True)
+
+    def __str__(self):
+        return f"{self.name} {self.organization}-{self.role}"
+
    

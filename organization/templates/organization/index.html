@@ -1,41 +1,99 @@
 
 {% load static %}
+{% load bootstrap5 %}
 {%block css_files%}
+{% bootstrap_css%}
 <link rel='stylesheet' href="{% static 'organization/test.css'%}">
 {% endblock %}
 
 
 {% block content %}
-<div class="container">
+<div class="landing-container">
   <nav class="navbar">
       <ul>
           <li><a href="#home">Home</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#service">Service</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
   <section id="home">
-    <div>
-    <div class = "text-left grid-item">
-    <h1>One platform to do it all</h1>
-    <p class="lead">Take survey, explore </p>
+    <div class = "grid-container">
+      <div class = 'grid-item-left-home'>
+    <h1>The place, where feedback matters</h1>
+    <p class="lead">One platform to do it all</p>
+    <div class = "buttons-home-left">
+      <a class="button-18" href="{% url 'users:login' %}">Log in</a>&nbsp&nbsp&nbsp&nbsp
+      <a class="button-18 plain-button" href="#about">Explore</a>  
     </div>
-    <img class = 'home-image grid-item'  src="{% static 'images/home-art.png' %}">
-  </div>
+      </div>
+    <img class = 'grid-item-right-home'  src="{% static 'images/home-art.png' %}">
+    </div>
   </section>
   <section id="about">
-    <div class = 'text-right'>
-      <h1>About</h1>
-      <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi, quis!</p>
-  </section>
-  <section id="service">
-      <h1>Service</h1>
-      <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi, quis!</p>
+    <div class = 'landing-about'>
+      <h1>Everything you need to guide your team towards the future</h1>
+    </div>
+    <div class ='grid-container-about'>
+      <div class="grid-item">
+        <img src="{% static 'images/smiling.png' %}">
+        <h2>Measure satisfaction</h2>
+        <p>Obtain instantaneous feedback to enhance products, services, and overall business performance.</p>
+      </div>
+      <div class="grid-item">
+        <img src="{% static 'images/engagement.png' %}">
+        <h2>Employee engagement</h2>
+        <p>Gain insights on retaining top talent and cultivating a thriving company culture.</p>
+      </div>
+      <div class="grid-item">
+        <img src="{% static 'images/data-viz.png' %}">
+        <h2>Interactive visualization</h2>
+        <p>Experience uninterrupted, real-time dynamic data update that ensure no valuable insights are missed.</p>
+      </div>
+      <div class="grid-item">
+        <img src="{% static 'images/collab.png' %}">
+        <h2>Enhanced collaboration</h2>
+        <p>Provide employees with more freedom to work where they want, while doing so more efficiently. </p>
+      </div>
+      <div class="grid-item">
+        <img src="{% static 'images/transaction.png' %}">
+        <h2>Project management</h2>
+        <p>Set project timelines and milestones, track progress, and manage your team’s feedback in one place.</p>
+      </div>
+      <div class="grid-item">
+        <img src="{% static 'images/distribution.png' %}">
+        <h2>API integration</h2>
+      <p>Connect survey results with existing customer data using API integration for CRM, to get a better understanding of your customers.</p>
+      </div>
+     </div> 
   </section>
   <section id="contact">
-      <h1>Contact</h1>
-      <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi, quis!</p>
+  <div class = "grid-container" style='height:100%'>
+    <div class = 'grid-item-left-home'>
+          <h1>Ask us a question!</h1>
+          <ul>
+            <li><p>Manage multiple users and gain visibility into all survey data collected across your organization with admin controls and dashboards.</p></li>
+            <li><p>Ensure confidential data is protected with enhanced security including encryption, SSO, and features that help you remain compliant with HIPAA and GDPR.</p></li>
+          </ul>  
+          <a class="button-18" href="{% url 'users:register' %}">Register</a>
+          </div>    
+  <div class = "grid-item-right-home" style="width:90%">
+    <div class = 'grid-item'>
+    <div class="container" style="max-width:600px">
+      <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h2>Contact us to become a partner</h2>
+      </div>
+          <div>
+            <form method="post" action="{% url 'organization:index' %}" class="form">
+              {% csrf_token %}
+              {% bootstrap_form form %}
+              {% buttons %}
+                <button name="submit" class="btn btn-primary plain-button">Submit</button>
+              {% endbuttons %}
+              <input type="hidden" name="next" value="{% url 'organization:index' %}" />
+              </form>
+      </div>
+  </div>
+  </div>
   </section>
 </div>
 {% endblock %}

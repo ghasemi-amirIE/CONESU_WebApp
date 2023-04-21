@@ -6,7 +6,7 @@ from . import views
 app_name = 'organization'
 
 urlpatterns = [
-    path('', views.index, name = 'index'),
+    path('', views.landing_page, name = 'index'),
     path("new_organization/", NewOrgView.as_view(), name = 'neworg'),
     path('success/', views.success, name = 'success'),
     path('orgs/', views.orgs, name = 'organizations'),
