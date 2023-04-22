@@ -1,13 +1,106 @@
-{% extends "organization/base.html" %}
 
-{% block header %}
- 
-{% endblock header %}
-
+{% load static %}
+{% load bootstrap5 %}
+{%block css_files%}
+{% bootstrap_css%}
+<link rel='stylesheet' href="{% static 'organization/test.css'%}">
+{% endblock %}
 {% block content %}
+<div class="landing-container">
+  <nav class="navbar">
+      <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+  <section id="home">
+    <div class = "grid-container">
+      <div class = 'grid-item-left-home'>
+    <h1>The place, where feedback matters</h1>
+    <p class="lead">One platform to do it all</p>
+    <div class = "buttons-home-left">
+      <a class="button-18" href="{% url 'users:login' %}">Log in</a>&nbsp&nbsp&nbsp&nbsp
+      <a class="button-18 plain-button" href="#about">Explore</a>  
+    </div>
+      </div>
+    <img class = 'grid-item-right-home'  src="{% static 'organization/images/home-art.png' %}">
+    </div>
+  </section>
+  <section id="about">
+    <div class = 'landing-about'>
+      <h1>Everything you need to guide your team towards the future</h1>
+    </div>
+    <div class ='grid-container-about'>
+      <div class="grid-item">
+        <img src="{% static 'organization/images/data-viz.png' %}">
+        <h2>Measure satisfaction</h2>
+        <p>Obtain instantaneous feedback to enhance products, services, and overall business performance.</p>
+      </div>
+      <div class="grid-item">
+        <img src="{% static 'organization/images/engagement.png' %}">
+        <h2>Employee engagement</h2>
+        <p>Gain insights on retaining top talent and cultivating a thriving company culture.</p>
+      </div>
+      <div class="grid-item">
+        <img src="{% static 'organization/images/data-viz.png' %}">
+        <h2>Interactive visualization</h2>
+        <p>Experience uninterrupted, real-time dynamic data update that ensure no valuable insights are missed.</p>
+      </div>
+      <div class="grid-item">
+        <img src="{% static 'organization/images/collab.png' %}">
+        <h2>Enhanced collaboration</h2>
+        <p>Provide employees with more freedom to work where they want, while doing so more efficiently. </p>
+      </div>
+      <div class="grid-item">
+        <img src="{% static 'organization/images/transaction.png' %}">
+        <h2>Project management</h2>
+        <p>Set project timelines and milestones, track progress, and manage your team’s feedback in one place.</p>
+      </div>
+      <div class="grid-item">
+        <img src="{% static 'organization/images/distribution.png' %}">
+        <h2>API integration</h2>
+      <p>Connect survey results with existing customer data using API integration for CRM, to get a better understanding of your customers.</p>
+      </div>
+     </div> 
+  </section>
+  <section id="contact">
+  <div class = "grid-container" style='height:100%'>
+    <div class = 'grid-item-left-home'>
+          <h1>Ask us a question!</h1>
+          <ul>
+            <li><p>Manage multiple users and gain visibility into all survey data collected across your organization with admin controls and dashboards.</p></li>
+            <li><p>Ensure confidential data is protected with enhanced security including encryption, SSO, and features that help you remain compliant with HIPAA and GDPR.</p></li>
+          </ul>  
+          <a class="button-18" href="{% url 'users:register' %}">Register</a>
+          </div>    
+  <div class = "grid-item-right-home" style="width:90%"> 
+    <div class = 'grid-item' style = 'width: 70%'>
+    <div class="container" style="max-width:600px">
+      <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h2>Contact us to become a partner</h2>
+      </div>
+          <div>
+            <form method="post" action="{% url 'organization:index' %}" class="form">
+              {% csrf_token %}
+              {% bootstrap_form form %}
+              {% buttons %}
+                <button name="submit" class="btn btn-primary plain-button">Submit</button>
+              {% endbuttons %}
+              <input type="hidden" name="next" value="{% url 'organization:index' %}" />
+              </form>
+      </div>
+  </div>
+  </div>
+  </section>
+</div>
+{% endblock %}
+{% comment %}
 <div class='jumbotron'>
   <h1 class='display-3'>Share your opinion!</h1>        
 </div>
+<section class = 'home-section'>
+ <div class='container'>
   <h2>
     We are glad to have you here and appreciate 
     your interest in sharing your thoughts and 
@@ -16,6 +109,7 @@
      mission of promoting peace, human rights, and 
      sustainable development across the globe. 
   </h2>
+<div>
   {% if user.is_authenticated %}
   <a class="btn btn-primary" href={% url 'organization:profile'%} role="button">My Profile</a>
   <a class="btn btn-primary" href={% url 'info_pages:project' project_name='unproject' %} role="button">Project</a>
@@ -25,7 +119,7 @@
             <li><a href="{% url 'users:register' %}">Register</a>&nbsp &nbsp</li>
             <li><a href="{% url 'users:login' %}"> Log in  </a></li>
           {% endif %}
-  
+  <section>
 
   
-{% endblock content %}
+{% endblock content %} {% endcomment %}

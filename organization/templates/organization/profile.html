@@ -4,11 +4,11 @@
 {% block page_title %}<title>Profile page</title>{% endblock page_title %}
 
 {%block css_files%}
-<link rel='stylesheet' href="{% static 'organization/landing.css'%}">
+<link rel="stylesheet" href="{% static 'organization/landing.css' %}" type="text/css" media="screen">
 {% endblock %}
-{% block scripts %}
-{% endblock scripts %}
+
 {% block content %}
+<body>
 
     <div class="container profile">
         <img src="{{avatar.url}}">
@@ -35,7 +35,7 @@
       <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+      {% block scripts %}
       <script>
         var ctx = document.getElementById('Satis_bar').getContext('2d');
         var myChart = new Chart(ctx, {
@@ -122,7 +122,8 @@
         });
         
       </script>
-
+      {% endblock scripts %}
+    </body>
 {% endblock content %}
 
 

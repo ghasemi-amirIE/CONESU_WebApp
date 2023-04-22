@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
-from .forms import SurveyForm, NewOrgForm
+from .forms import SurveyForm, ContactForm
 from .models import OrgProfile, Survey
 from django.http import Http404
 from django.views.generic.base import TemplateView
@@ -99,6 +99,22 @@ def profile(request):
 
 class Landing(TemplateView):
     template_name = "girdtest.html"
+
+def landing_page(request):
+    if request.method != 'POST':
+        form = ContactForm()
+    else:
+        #Post data submitted, process data.
+        form = ContactForm(data = request.POST)
+        if form.is_valid():
+            new_survey = form.save(commit = False)
+            new_survey.participant = request.user
+            new_survey.save()
+            return redirect('organization:profile')
+        
+    #Display form.
+    context = {'form': form}
+    return render(request, 'organization/index.html', context)
 
     
 
