@@ -25,7 +25,7 @@ class Survey(models.Model):
     POSITION_CHOICE = [
             (STUDENT, 'Student'),
             (EMPLOYEE, 'Employee'),]
-    organization = models.OneToOneField(OrgProfile, on_delete= models.CASCADE)
+    organization = models.ForeignKey(OrgProfile, on_delete= models.CASCADE)
     satsified = models.IntegerField( validators=[MinValueValidator(1), MaxValueValidator(10)])
     period = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(40)])
     occupation = models.CharField(max_length=10, choices=POSITION_CHOICE)

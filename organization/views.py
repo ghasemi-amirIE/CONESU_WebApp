@@ -110,13 +110,17 @@ def landing_page(request):
             new_survey = form.save(commit = False)
             new_survey.participant = request.user
             new_survey.save()
-            return redirect('organization:profile')
+            return redirect('organization:index')
         
     #Display form.
     context = {'form': form}
     return render(request, 'organization/index.html', context)
 
     
+class Sidebar(TemplateView):
+    template_name = "sidebar.html"
+
+
 
 
 

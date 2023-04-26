@@ -3,9 +3,13 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
-    
+<div class="container" style="max-width:600px">
+  <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">register</h1>
+<div class="py-5">
+  <div class="row">
+    <div class="col-12">
   <form method="post" action="{% url 'users:register' %}" class="form"  enctype="multipart/form-data">
-
     {% csrf_token %}
     {% bootstrap_form form %}
 
@@ -15,5 +19,8 @@
     
     <input type="hidden" name="next" value="{% url 'organization:profile' %}" />
   </form>
+</div>
+</div>
+</div>
     
 {% endblock content %}

@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import NewOrgView, Pie
+from .views import NewOrgView, Pie, Sidebar
 from . import views
 
 
@@ -15,4 +15,5 @@ urlpatterns = [
     path('survey/', views.survey, name="survey"),
     path('profile/', views.profile, name = 'profile'),
     path('info_pages/', include('info_pages.urls')),
+    path('sidebar/', Sidebar.as_view(), name = 'sidebar'),
 ]
