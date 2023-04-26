@@ -7,7 +7,7 @@ from django.dispatch import receiver
 class CustomUser(AbstractUser):
     first_name = models.CharField(max_length=150, verbose_name='First name')
     last_name = models.CharField(max_length=150, verbose_name='Last name')
-    organization = models.CharField(max_length=150, verbose_name='Organization')
+    organization = models.ForeignKey('organization.OrgProfile', on_delete=models.DO_NOTHING)
     position = models.CharField(max_length=150, verbose_name='Position')
     avatar = models.ImageField(blank=True, upload_to="avatars")
 

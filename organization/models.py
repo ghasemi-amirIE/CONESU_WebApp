@@ -7,9 +7,9 @@ import datetime
 
 # Create your models here.
 class OrgProfile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
+    """ user = models.ForeignKey(settings.AUTH_USER_MODEL, blank = True,  on_delete=models.DO_NOTHING) """
     title = models.CharField(max_length=200, blank=False)
-    logo = models.ImageField(blank=True, upload_to='uploads')
+    logo = models.ImageField(blank=True, upload_to='avatars')
     vision = models.CharField(max_length=250, blank=True)
     mission = models.CharField(max_length=500, blank=True)
     num_employees = models.CharField(max_length=20)

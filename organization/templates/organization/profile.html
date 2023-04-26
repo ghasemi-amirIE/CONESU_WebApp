@@ -8,26 +8,26 @@
 {% endblock %}
 
 {% block content %}
-<body>
 
+<body>
+  <div class = 'page-grid'>
+    <div>{% comment %} empty div for sidebar {% endcomment %}</div>
+    <div>
     <div class="container profile">
         <img src="{{avatar.url}}">
         <div class "profile">
             <h1>{{f_name}} {{l_name}}</h1>
             <p>{{org}} - {{position}}</p>
-            
-            
         </div>
         <div class ='profile-buttons'>
           <a class="button-18" href={% url 'organization:survey'%} role="button">Connect</a>&nbsp&nbsp&nbsp&nbsp&nbsp
           <a class="button-18" href={% url 'organization:organizations'%} role="button">Message</a>	&nbsp&nbsp&nbsp&nbsp&nbsp
         </div>
     </div>
-  </div>
   <div class ="grid-container container">
-   <div class="grid-item"> <canvas class id="Satis_bar"></canvas></div>
+   <div class="grid-item"> <canvas class id="Satis_bar" height = '300px'></canvas></div>
    <div class="grid-item"><canvas class id="Satis_bar2"></canvas> </div>
-   <div class="grid-item"><canvas class id="Satis_bar3"></canvas> </div>
+   <div class="grid-item"><canvas class id="Satis_bar3" height = '300px'></canvas> </div>
   </div> 
 
       <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -97,14 +97,14 @@
       <script>
         var ctx = document.getElementById('Satis_bar3').getContext('2d');
         var myChart = new Chart(ctx, {
-          type: 'bar',
+          type: 'line',
           data: {
-            labels: ['{{f_name}} {{l_name}}', 'Average'],
+            labels: {{org_label}},
             datasets: [{
-              label: 'Satisfaction',
-              data: ['{{satis_user.user__satis}}', '{{satis_exc.avg__satis}}'],
+              label: 'Projects',
+              data: {{surv_data}},
               backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
-              borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
+              borderColor: [ 'rgba(54, 162, 235, 1)'],
               borderWidth: 1
             }]
           },
@@ -121,7 +121,6 @@
         
       </script>
       {% endblock scripts %}
-    </body>
 {% endblock content %}
-
+</body>
 

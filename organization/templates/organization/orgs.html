@@ -1,8 +1,8 @@
 {% extends "organization/base.html" %}
+{% block page_title %}<p>Organizations</p>{% endblock page_title %}
 {% block content%}
-
-<p>Organizations</p>
-
+<div></div>
+<div>
     <ul>
         {%for org in organizations %}
          <li> 
@@ -13,5 +13,5 @@
         {% endfor %}
     </ul>
     <a href ="{% url 'organization:neworg' %}">Create organization</a>
-
+</div>
 {% endblock content%}

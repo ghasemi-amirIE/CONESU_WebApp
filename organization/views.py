@@ -35,14 +35,16 @@ def orgpage(request, org_id):
     org = OrgProfile.objects.get(id = org_id)
     #survey results to put into dashboard
     survey_results = Survey.objects.filter(organization_id = org_id)
-    avg_satis = survey_results.aggregate(Avg('satsified'))
+    satis_stud = survey_results.filter(occupation = "STUD").aggregate(Avg('satsified'))
+    satis_emp = survey_results.filter(occupation = "EMP").aggregate(Avg('satsified'))
     avg_period = survey_results.aggregate(Avg('period'))
     totalsurvs = survey_results.count()
     studs = survey_results.filter(occupation = 'STUD').count()
     emps = survey_results.filter(occupation = 'EMP').count()
     
     context = {'org':org,
-               'satisfaction': avg_satis,
+               'satis_stud':satis_stud,
+               'satis_emp': satis_emp,
                'period':avg_period,
                'count':totalsurvs,
                'studs':studs,
@@ -77,7 +79,11 @@ def profile(request):
     user = CustomUser.objects.get(id=request.user.id)
     satis_user = Survey.objects.filter(Q(participant_id=request.user.id)).aggregate(user__satis=Avg('satsified'))
     satis_exc = Survey.objects.filter(~Q(participant_id=request.user.id)).aggregate(avg__satis=Avg('satsified'))             
-    org_count = Survey.objects.filter(participant_id = request.user).values('organization').annotate(count = Count('organization'))                            
+    org_count = Survey.objects.filter(participant_id = request.user).values('organization').annotate(count = Count('organization'))          
+    all_surv = Survey.objects.filter(participant_id=request.user.id).values()    
+
+    org_label = [i['organization_id'] for i in all_surv]              
+    surv_data = [i['satsified'] for i in all_surv]              
     
     passed_orgs = [i['organization'] for i in org_count]
     passed_times = [i['count'] for i in org_count]
@@ -94,6 +100,8 @@ def profile(request):
         'passed_orgs': passed_orgs,
         'passed_times':passed_times,
         'org_count': org_count,
+        'org_label':org_label,
+        'surv_data':surv_data,
     }
     return render(request, 'organization/profile.html', context)
 

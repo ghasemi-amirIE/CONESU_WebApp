@@ -2,10 +2,19 @@
 {% load bootstrap5 %}
 
 {% block content %}
+<div class="container" style="max-width:600px">
+  <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">log in</h1>
+<div class="py-5">
+  <div class="row">
+    <div class="col-12">
   <h2>Edit Profile</h2>
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {% bootstrap_form form %}
     <button type="submit">Save Changes</button>
   </form>
+</div>
+</div>
+</div>
 {% endblock %}
