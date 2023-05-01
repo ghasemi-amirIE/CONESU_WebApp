@@ -201,7 +201,7 @@ body {
 
 .org {
     display: grid;
-    grid-template-columns: 70% 30%;
+    grid-template-columns: 10% 60% 30%;
     width: 80%;
     align-items: center;
     position: relative;
@@ -210,14 +210,23 @@ body {
 .org img {
   width: 100px;
   height: 100px;
+  margin-bottom: 40px
 }
 
 .info {
+  margin-top: 40px;
   margin-left: 10px;
-  margin-top: 150px;
   justify-content: center;
 }
 
 .info ul{
   list-style-type: none;
+}
+
+#loop-container {
+  height: 6000px; /* Adjust to the desired height of your loop */
+  overflow: hidden;
+}
+.loop-item {
+  height: 2000px; /* Should match the container height */
 }

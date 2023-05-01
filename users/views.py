@@ -3,7 +3,6 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic.edit import CreateView
 from django.contrib.auth import update_session_auth_hash
 from .forms import CustomUserCreationForm
-from .models import CustomUser
 
 class RegisterView(CreateView):
     form_class = CustomUserCreationForm

@@ -13,36 +13,38 @@
   <div class = 'page-grid'>
     <div>{% comment %} empty div for sidebar {% endcomment %}</div>
     <div>
-    <div class="container profile">
-        <img src="{{avatar.url}}">
+    <div  id = "profile" class="container profile"> 
+        <img src="{{user.avatar.url}}">
         <div class "profile">
-            <h1>{{f_name}} {{l_name}}</h1>
-            <p>{{org}} - {{position}}</p>
+            <h1>{{user.first_name}} {{user.last_name}}</h1>
+            <p>{{user.organization}} - {{user.position}}</p>
         </div>
         <div class ='profile-buttons'>
-          <a class="button-18" href={% url 'organization:survey'%} role="button">Connect</a>&nbsp&nbsp&nbsp&nbsp&nbsp
-          <a class="button-18" href={% url 'organization:organizations'%} role="button">Message</a>	&nbsp&nbsp&nbsp&nbsp&nbsp
+          <a class="button-18" href={% url 'organization:survey'%} role="button">Survey</a>&nbsp&nbsp&nbsp&nbsp&nbsp
         </div>
     </div>
   <div class ="grid-container container">
    <div class="grid-item"> <canvas class id="Satis_bar" height = '300px'></canvas></div>
-   <div class="grid-item"><canvas class id="Satis_bar2"></canvas> </div>
-   <div class="grid-item"><canvas class id="Satis_bar3" height = '300px'></canvas> </div>
+   <div class="grid-item"><canvas class id="Pie"></canvas> </div>
+   <div class="grid-item"><canvas class id="Projects" height = '300px'></canvas> </div>
   </div> 
 
-      <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-      {% block scripts %}
+      
+  {% block scripts %}
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
       <script>
         var ctx = document.getElementById('Satis_bar').getContext('2d');
         var myChart = new Chart(ctx, {
           type: 'bar',
           data: {
-            labels: ['{{f_name}} {{l_name}}', 'Average'],
+            labels: ['{{user.first_name}} {{user.last_name}}', 'Average'],
             datasets: [{
               label: 'Satisfaction',
-              data: ['{{satis_user.user__satis}}', '{{satis_exc.avg__satis}}'],
+              data: ['{{surv_satis.user_satisfaction}}', '{{surv_satis.avg_satisfaction}}'],
               backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
               borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
               borderWidth: 1
@@ -61,8 +63,19 @@
         
       </script>
       <script>
-        {% comment %} For loop doenst work - cant pull list of organizations and satisfaction levels  {% endcomment %}
-        var ctx = document.getElementById('Satis_bar2').getContext('2d');
+
+        {% comment %} in oder to use proper for loop inside this script, it would look like this:
+{% with organization_ids = [] %}
+  {% for project in projects %}
+    {% for digit in str(project.organization_id) %}
+      {{ organization_ids.append(int(digit)) }}
+    {% endfor %}
+  {% endfor %}
+{% endwith %}
+
+{{ organization_ids }}  - easier to create list in view{% endcomment %}
+
+        var ctx = document.getElementById('Pie').getContext('2d');
         var myChart = new Chart(ctx, {
           type: 'doughnut',
           data: {
@@ -95,7 +108,7 @@
         
       </script>
       <script>
-        var ctx = document.getElementById('Satis_bar3').getContext('2d');
+        var ctx = document.getElementById('Projects').getContext('2d');
         var myChart = new Chart(ctx, {
           type: 'line',
           data: {
@@ -121,6 +134,6 @@
         
       </script>
       {% endblock scripts %}
+    </body>
 {% endblock content %}
-</body>
 

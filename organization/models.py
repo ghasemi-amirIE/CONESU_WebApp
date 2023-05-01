@@ -1,15 +1,12 @@
 from django.db import models
-
-from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
 from users.models import CustomUser
 import datetime
 
-# Create your models here.
+#Model for organizations
 class OrgProfile(models.Model):
-    """ user = models.ForeignKey(settings.AUTH_USER_MODEL, blank = True,  on_delete=models.DO_NOTHING) """
     title = models.CharField(max_length=200, blank=False)
-    logo = models.ImageField(blank=True, upload_to='avatars')
+    logo = models.ImageField(upload_to='org_logo')
     vision = models.CharField(max_length=250, blank=True)
     mission = models.CharField(max_length=500, blank=True)
     num_employees = models.CharField(max_length=20)
@@ -19,18 +16,25 @@ class OrgProfile(models.Model):
     def __str__(self):
         return f"{self.title}"
 
+#Basic survey model. It now stores both questions and answers, this is a simple solution that needs to be rebuild.
 class Survey(models.Model):
     STUDENT = 'STUD'
     EMPLOYEE = 'EMP'
     POSITION_CHOICE = [
             (STUDENT, 'Student'),
             (EMPLOYEE, 'Employee'),]
+    
     organization = models.ForeignKey(OrgProfile, on_delete= models.CASCADE)
     satsified = models.IntegerField( validators=[MinValueValidator(1), MaxValueValidator(10)])
     period = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(40)])
     occupation = models.CharField(max_length=10, choices=POSITION_CHOICE)
     participant = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name_plural = 'Surveys'
+
+    
+#Model for contact form on landing page. Might create an abstract user model to store often used fields
 class Contact(models.Model):
     name = models.CharField(max_length=100, name="Full name")
     organization = models.CharField(max_length=100, name = "Company")

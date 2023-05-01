@@ -77,7 +77,6 @@
     font-size: 2rem;
   }
   
-  /* Section Images */
   section#home {
     background-color: white;
   }
@@ -87,7 +86,7 @@
   }
   
   section#contact {
-    background: url('static/images/datacontact.png') center center no-repeat;
+    background: white;
   }
   
   

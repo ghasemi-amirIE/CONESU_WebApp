@@ -1,20 +1,26 @@
-{%extends 'organization/base.html'%}
-{%block content%}
-	<div class="container" style="max-width:600px">
-		<div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-			<h1 class="display-4">Register the company</h1>
-		
-		</div>
-		<div class="py-5">
-			<div class="row">
-				<div class="col-12">
-					<form method="post">
-						{% csrf_token %}
-						{{ form.as_p }}
-						<input type="submit">
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-{%endblock content%}
+{% extends "organization/base.html" %}
+{% load bootstrap5 %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+<div class="container" style="max-width:600px">
+  <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Register your company first!</h1>
+      <div class="py-5">
+        <div class="row">
+          <div class="col-12">
+            <form method="post" action="{% url 'organization:neworg' %}" class="form"  enctype="multipart/form-data">
+              {% csrf_token %}
+              {% bootstrap_form form %}
+              {% buttons %}
+                <button name="submit" class="btn btn-primary">register</button>
+              {% endbuttons %}
+              <input type="hidden" name="next" value="{% url 'users:register' %}" />
+            </form>
+          </div>
+        </div>
+      </div>
+  </div>  
+{% endblock content %}

@@ -2,36 +2,29 @@
 {%extends 'organization/base.html'%}
 {%load static%}
 {% load bootstrap5 %}
-{%block css_files%%}
+{%block css_files%}
+<link rel="stylesheet" href="{% static 'organization/landing.css' %}" type="text/css" media="screen">
 {% endblock %}
 {% block page_header %}
 {% endblock page_header %}
 
-{% block content %}
-<link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet"> 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="{% static 'organization/landing.css' %}" type="text/css" media="screen">
- 
-  </head>
-  
+{% block content %}  
   <body>
     <div class = 'page-grid'>
       <div style ='height:100%'>{% comment %} empty div for sidebar {% endcomment %}</div>
       <div class='content'>
         <div class="org container " style='width: 100%;'>
           <div>
-            <img src="{% static 'images/HvA.png' %}">
-            <h1>Hogeschool van Amsterdam</h1>
-            <p>{{org.mission}} </p>    
+            <img src="{{org.logo.url}}">
+          </div>
+          <div>
+            <h1>{{org.title}}</h1>
+            <p>{{org.mission}}</p>    
           </div>
           <div class='info'>
             <ul style = 'border-left: 1px solid black;'>
               <li>Founded in {{org.founded}}</li>
-              <li>Number of employees {{org.num_employees}}</li>
+              <li>Number of employees: {{org.num_employees}}</li>
               <li>Email: {{org.email}}</li>
             </ul>
           </div>
@@ -43,11 +36,17 @@
             <canvas class id="survs"></canvas>
           </div>
           <div class="grid-item"><canvas class id="Satis_bar" height = '400px'></canvas> </div>
-          <div class="grid-item" height = '600px'><canvas class id="radar" ></canvas> </div>
+          <div class="grid-item"><canvas class id="radar"></canvas> </div>
          </div> 
         
 
 {% block scripts %}
+
+<link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet"> 
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
   {% comment %} For loop doenst work - cant pull list of organizations and satisfaction levels  {% endcomment %}
   var ctx = document.getElementById('survs').getContext('2d');
@@ -112,7 +111,7 @@
         labels: ['Time', 'Statisfaction', 'Projects'],
         datasets: [{
           label: 'Students',
-          data: [4,8, 5],
+          data: {{stud_projects}},
           fill: true,
           backgroundColor: 'rgba(54, 162, 235, 0.2)',
           borderColor: 'rgba(54, 162, 235, 0.2)',
@@ -122,7 +121,7 @@
           pointHoverBorderColor: 'rgb(255, 99, 132)'
         },{
           label: 'Employees',
-          data: [6,7, 10],
+          data: {{emp_projects}},
           fill: true,
           backgroundColor: 'rgba(255, 99, 132, 0.2)',
           borderColor: 'rgb(255, 99, 132)',
